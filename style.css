@@ -1,0 +1,110 @@
+/* 这是一个"选择器 { 属性: 值; }"的文件。改一个值，刷新页面就能看到变化 */
+
+/* :root 里放"全局变量"，改一处，全站跟着变 */
+:root {
+  --ink: #151514;      /* 正文颜色 */
+  --paper: #c5d7ea;    /* 背景色，微微泛黄，比纯白舒服 */
+  --accent: #da8e79;   /* 强调色 */
+  --muted: #5768ad;    /* 次要文字 */
+}
+
+/* * 表示"所有元素"：清掉浏览器自带的边距 */
+* {
+  box-sizing: border-box; /* 让 padding 不会把盒子撑大，新手最常踩的坑之一 */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  /* 字体：优先用系统里的这几款，找不到就退到 serif */
+  font-family: "Georgia", "Songti SC", "SimSun", serif;
+  line-height: 1.9;       /* 行高，中文 1.8~2.0 最舒服 */
+  font-size:22px;
+  padding: 0 24px;
+}
+
+/* 内容区居中，最大 680px —— 超过这个宽度人眼就追不上行了 */
+header,
+main,
+footer {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+header {
+  padding: 72px 0 48px;
+  border-bottom: 1px solid #e8e2d8;
+}
+
+h1 {
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+article {
+  padding: 36px 0;
+  border-bottom: 1px dashed #e8e2d8;
+}
+
+h2 {
+  font-size: 21px;
+  font-weight: normal;
+}
+
+/* a 是链接。默认那个蓝色太丑了，我们改掉 */
+a {
+  color: var(--ink);
+  text-decoration: none;   /* 去掉下划线 */
+  transition: color 0.2s;  /* 颜色变化用 0.2 秒渐变，不是硬切 */
+}
+
+a:hover {
+  color: var(--accent);    /* 鼠标悬停时变色 */
+  text-decoration: underline;
+}
+
+.date {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 6px 0 10px;
+}
+
+footer {
+  padding: 48px 0 80px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 手机屏幕（宽度小于 600px）时，字号收一点 */
+@media (max-width: 600px) {
+  body { font-size: 16px; padding: 0 18px; }
+  h1   { font-size: 26px; }
+  header { padding-top: 48px; }
+}
+body.dark {
+  --paper: #17171a;
+  --ink: #e8e2d8;
+}
+
+/* 让那个按钮浮在右上角，好看一点 */
+button#theme {
+  position: fixed;      /* 钉在窗口上，不跟着页面滚 */
+  top: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 90%;   /* 圆角到 50% 就是圆 */
+  border: 1px solid #e0d8cc;
+  background: var(--paper);
+  font-size: 18px;
+  cursor: pointer;      /* 鼠标变小手 */
+}

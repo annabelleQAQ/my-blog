@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- 上面这行叫文档声明，告诉浏览器：我是 HTML5。所有网页都从它开始 -->
+<html lang="zh-CN">
+<head>
+  <!-- head 是"给浏览器看的部分"，不会显示在页面上 -->
+  <meta charset="UTF-8">
+  <!-- 这行管手机：让页面按屏幕宽度显示，不加的话手机上会糊成一团小字 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阿玉的乱七八糟</title>
+  <!-- 把样式表接进来。href 是"去哪儿找这个文件"，./ 表示"跟我同一个文件夹" -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- body 里的东西才会显示出来 -->
+
+  <header>
+    <h1>伊伊的乱七八糟</h1>
+    <p class="sub">大二 · 软件工程 · 想到什么写什么</p>
+  </header>
+
+  <main>
+    <article>
+      <h2><a href="./posts/hello.html">第一篇：我为什么开始写博客</a></h2>
+      <p class="date">2026 年 10 月 26 日</p>
+      <p>因为焦虑。因为同学都在做网页，而我还在背概念……</p>
+    </article>
+
+    <article>
+      <h2><a href="./posts/hello.html">第二篇：命令行没那么可怕</a></h2>
+      <p class="date">2026 年 10 月 20 日</p>
+      <p>以前那个黑框我碰都不敢碰，现在发现它只是……</p>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2026 阿玉 · 用手写的</p>
+  </footer>
+
+  <!-- 下面两行就是缺的东西：一个按钮，外加把 JS 接进来 -->
+  <button id="theme">🌙</button>
+  <script src="./script.js"></script>
+</body>
+</html>
