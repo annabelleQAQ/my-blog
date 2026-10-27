@@ -509,7 +509,7 @@ h2 {
   h2 {
     font-size:25px
   }
-  
+
 }
 @media(prefers-reduced-motion:reduce) {
   html {
@@ -518,5 +518,5 @@ h2 {
   * {
     transition:none!important
   }
-  
+
 }
