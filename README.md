@@ -1,41 +1,45 @@
-# 我的第一个博客
+# 伊伊的乱七八糟
 
-纯手写，零依赖。三个文件就能跑。
+一个记录学习与生活的个人博客，使用原生 HTML、CSS 和 JavaScript，零运行依赖。
 
-## 文件都是干什么的
+## 功能
 
-| 文件 | 作用 |
-|---|---|
-| `index.html` | 首页。HTML 决定"页面上有什么" |
-| `style.css` | 样式。CSS 决定"长什么样" |
-| `posts/hello.html` | 一篇具体文章 |
-| `README.md` | 就是本文件，给人看的说明书 |
+- 响应式首页、个人介绍和三篇可编辑的起始文章
+- 按分类筛选、关键词搜索与空结果提示
+- 深浅主题切换，记住选择，首次访问跟随系统主题
+- 键盘焦点、跳到正文链接、辅助技术状态提示与减少动画支持
 
-## 本地怎么预览
+文章目前为起始示例文案，可以直接改成自己的真实经历。
 
-双击 `index.html` 就行。改完 CSS 保存，刷新浏览器就能看到变化。
+## 本地运行
 
-## 怎么改（试试这几个）
+在仓库根目录执行（需要 Python 3）：
 
-1. 打开 `style.css`，把 `--accent` 的颜色改一个值 → 刷新，看链接颜色变了
-2. 把 `body` 里的 `font-size: 17px` 改成 `20px` → 字变大
-3. 打开 `index.html`，在 `<main>` 里复制一个 `<article>` 块 → 多一篇文章
-4. 把 `--paper` 改成 `#1a1a1a`、`--ink` 改成 `#e8e2d8` → 你就有了暗色模式
+```sh
+python3 -m http.server 8000 --bind 127.0.0.1
+```
 
-## 怎么上线（白嫖，不用买服务器）
+在浏览器中打开本地服务器。也可以直接打开 `index.html`；浏览器可能限制文件模式下的主题偏好存储。
 
-**方式一：Netlify Drop（最快，30 秒）**
-1. 打开 https://app.netlify.com/drop
-2. 把整个 `my-blog` 文件夹拖进网页
-3. 得到一个 `xxx.netlify.app` 的地址，这就是你的博客了
+## 文件结构
 
-**方式二：GitHub Pages（更"程序员"一点）**
-1. 在 GitHub 建一个仓库，名字叫 `你的用户名.github.io`
-2. 把这三个文件传上去
-3. 等一两分钟，访问 `https://你的用户名.github.io`
+```text
+index.html              首页、搜索与分类
+about.html              个人介绍
+posts/hello.html        开始写博客
+posts/terminal.html     命令行学习笔记
+posts/small-steps.html  前端学习清单
+style.css               全站样式与移动端布局
+script.js               主题、搜索与筛选
+```
 
-## 下一步可以加什么
+新增文章时，在 `posts/` 中复制一个文章页面，修改标题、日期和正文，再在首页 `.post-grid` 中添加带有 `data-category` 的文章卡片。文章页使用 `../style.css` 与 `../script.js`。
 
-- 一个"关于我"页面
-- 暗色模式切换按钮（需要一点点 JS）
-- 用 Git 管理版本，每次改完 `git commit` 一次
+## 发布到 GitHub Pages
+
+1. 将更改提交并推送到 GitHub 仓库。
+2. 在仓库 **Settings → Pages → Build and deployment** 中选择 **Deploy from a branch**。
+3. 选择 `main` 分支、`/ (root)`，保存。
+4. 等待 GitHub 部署完成；默认项目站点为 `https://annabelleqaq.github.io/my-blog/`。
+
+所有站内资源使用相对路径，兼容项目站点的 `/my-blog/` 路径。无需构建命令，也无需密钥。

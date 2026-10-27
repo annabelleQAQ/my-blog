@@ -1,110 +1,522 @@
-/* 这是一个"选择器 { 属性: 值; }"的文件。改一个值，刷新页面就能看到变化 */
-
-/* :root 里放"全局变量"，改一处，全站跟着变 */
 :root {
-  --ink: #151514;      /* 正文颜色 */
-  --paper: #c5d7ea;    /* 背景色，微微泛黄，比纯白舒服 */
-  --accent: #da8e79;   /* 强调色 */
-  --muted: #5768ad;    /* 次要文字 */
+  --paper:#f7f6f2;
+  --surface:#eeede7;
+  --ink:#263c34;
+  --muted:#6f7870;
+  --accent:#47715b;
+  --line:#dedfd6;
+  --peach:#edd5bd;
+  color-scheme:light
 }
-
-/* * 表示"所有元素"：清掉浏览器自带的边距 */
 * {
-  box-sizing: border-box; /* 让 padding 不会把盒子撑大，新手最常踩的坑之一 */
-  margin: 0;
-  padding: 0;
+  box-sizing:border-box
 }
-
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:30px
+}
 body {
-  background: var(--paper);
-  color: var(--ink);
-  /* 字体：优先用系统里的这几款，找不到就退到 serif */
-  font-family: "Georgia", "Songti SC", "SimSun", serif;
-  line-height: 1.9;       /* 行高，中文 1.8~2.0 最舒服 */
-  font-size:22px;
-  padding: 0 24px;
-}
-
-/* 内容区居中，最大 680px —— 超过这个宽度人眼就追不上行了 */
-header,
-main,
-footer {
-  max-width: 680px;
-  margin: 0 auto;
-}
-
-header {
-  padding: 72px 0 48px;
-  border-bottom: 1px solid #e8e2d8;
-}
-
-h1 {
-  font-size: 32px;
-  letter-spacing: 2px;
-}
-
-.sub {
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 8px;
-  letter-spacing: 1px;
-}
-
-article {
-  padding: 36px 0;
-  border-bottom: 1px dashed #e8e2d8;
-}
-
-h2 {
-  font-size: 21px;
-  font-weight: normal;
-}
-
-/* a 是链接。默认那个蓝色太丑了，我们改掉 */
-a {
-  color: var(--ink);
-  text-decoration: none;   /* 去掉下划线 */
-  transition: color 0.2s;  /* 颜色变化用 0.2 秒渐变，不是硬切 */
-}
-
-a:hover {
-  color: var(--accent);    /* 鼠标悬停时变色 */
-  text-decoration: underline;
-}
-
-.date {
-  color: var(--muted);
-  font-size: 13px;
-  margin: 6px 0 10px;
-}
-
-footer {
-  padding: 48px 0 80px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* 手机屏幕（宽度小于 600px）时，字号收一点 */
-@media (max-width: 600px) {
-  body { font-size: 16px; padding: 0 18px; }
-  h1   { font-size: 26px; }
-  header { padding-top: 48px; }
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:16px/1.8 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif
 }
 body.dark {
-  --paper: #17171a;
-  --ink: #e8e2d8;
+  --paper:#19251f;
+  --surface:#25332b;
+  --ink:#e3e9db;
+  --muted:#a6b5a7;
+  --accent:#a9c9ab;
+  --line:#405044;
+  --peach:#635142;
+  color-scheme:dark
 }
-
-/* 让那个按钮浮在右上角，好看一点 */
-button#theme {
-  position: fixed;      /* 钉在窗口上，不跟着页面滚 */
-  top: 20px;
-  right: 20px;
-  width: 42px;
-  height: 42px;
-  border-radius: 90%;   /* 圆角到 50% 就是圆 */
-  border: 1px solid #e0d8cc;
-  background: var(--paper);
-  font-size: 18px;
-  cursor: pointer;      /* 鼠标变小手 */
+a {
+  color:inherit;
+  text-decoration:none
+}
+a:hover {
+  color:var(--accent)
+}
+button,input {
+  font:inherit
+}
+button,a,input {
+  -webkit-tap-highlight-color:transparent
+}
+button {
+  cursor:pointer
+}
+a:focus-visible,button:focus-visible,input:focus-visible {
+  outline:3px solid var(--accent);
+  outline-offset:5px
+}
+.wrap {
+  max-width:1120px;
+  margin:auto;
+  padding-inline:40px
+}
+.nav {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:28px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--line)
+}
+.brand {
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:-1px
+}
+.brand span {
+  font-size:12px;
+  font-weight:400;
+  letter-spacing:2px;
+  margin-left:10px;
+  color:var(--muted)
+}
+nav {
+  display:flex;
+  gap:26px;
+  align-items:center;
+  font-size:14px
+}
+nav [aria-current] {
+  color:var(--accent);
+  text-decoration:underline;
+  text-underline-offset:8px
+}
+#theme {
+  border:1px solid var(--line);
+  border-radius:50%;
+  width:36px;
+  height:36px;
+  background:transparent;
+  color:var(--ink);
+  font-size:23px;
+  line-height:1
+}
+.hero {
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:32px;
+  align-items:center;
+  padding:80px 0 65px
+}
+.eyebrow {
+  font:11px/1.5 monospace;
+  letter-spacing:2px;
+  color:var(--muted);
+  margin:0 0 24px
+}
+h1,h2,h3,p {
+  margin-top:0
+}
+h1 {
+  font-size:clamp(42px,5.5vw,68px);
+  line-height:1.25;
+  letter-spacing:-2px;
+  margin-bottom:24px;
+  font-family:Georgia,"Songti SC",serif
+}
+.dot {
+  color:#c17c51
+}
+.intro {
+  color:var(--muted);
+  font-size:16px;
+  line-height:2
+}
+.button {
+  display:inline-block;
+  background:var(--ink);
+  color:var(--paper);
+  padding:11px 21px;
+  border-radius:4px;
+  font-size:14px;
+  margin-top:8px
+}
+.button:hover {
+  background:var(--accent);
+  color:var(--paper)
+}
+.art {
+  height:350px;
+  position:relative;
+  display:grid;
+  place-items:center
+}
+.orbit {
+  position:absolute;
+  width:310px;
+  height:310px;
+  border-radius:50%;
+  background:var(--surface)
+}
+.paper {
+  position:relative;
+  background:var(--peach);
+  color:var(--ink);
+  transform:rotate(-9deg);
+  width:235px;
+  padding:30px;
+  box-shadow:10px 15px 0 #263c340b
+}
+.paper>span {
+  font:10px monospace;
+  letter-spacing:2px
+}
+.paper strong {
+  display:block;
+  font:700 31px/1.6 Georgia,"Songti SC",serif;
+  margin:26px 0
+}
+.paper i {
+  font:italic 17px Georgia,serif
+}
+.spark {
+  position:absolute;
+  right:20px;
+  top:12px;
+  font-size:90px;
+  color:var(--accent)
+}
+.art-label {
+  position:absolute;
+  bottom:0;
+  font:11px monospace;
+  letter-spacing:4px;
+  color:var(--muted)
+}
+.now {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:20px 24px;
+  border:1px solid var(--line);
+  border-radius:5px;
+  font-size:13px
+}
+.now p {
+  margin:0;
+  color:var(--muted)
+}
+.now strong {
+  white-space:nowrap
+}
+.status-dot {
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--accent);
+  flex-shrink:0
+}
+.writing {
+  padding:70px 0
+}
+.section-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:end
+}
+.section-heading .eyebrow {
+  margin-bottom:10px
+}
+h2 {
+  font-size:28px;
+  line-height:1.4
+}
+.section-heading>span {
+  font-size:12px;
+  color:var(--muted);
+  padding-bottom:24px
+}
+.tools {
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:center;
+  margin:5px 0 25px
+}
+.filters {
+  display:flex;
+  gap:8px
+}
+.filters button {
+  background:transparent;
+  border:1px solid transparent;
+  color:var(--muted);
+  padding:5px 13px;
+  font-size:13px;
+  border-radius:20px
+}
+.filters button[aria-pressed=true] {
+  background:var(--ink);
+  color:var(--paper)
+}
+.search {
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:10px
+}
+.search input {
+  width:170px;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--line);
+  padding:8px 0;
+  color:var(--ink);
+  font-size:13px;
+  border-radius:0
+}
+.post-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px
+}
+.post-card {
+  border:1px solid var(--line);
+  border-radius:5px;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  transition:transform .2s,border-color .2s
+}
+.post-card:hover {
+  transform:translateY(-4px);
+  border-color:var(--accent)
+}
+.meta {
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:25px
+}
+.meta>span:first-child {
+  color:var(--accent)
+}
+.post-card h3 {
+  font:600 21px/1.6 Georgia,"Songti SC",serif;
+  margin-bottom:14px
+}
+.post-card h3 span {
+  font-size:15px
+}
+.post-card p {
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:25px
+}
+.read {
+  font-size:12px;
+  margin-top:auto
+}
+.read span {
+  float:right
+}
+.about-strip {
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:32px 0;
+  display:flex;
+  align-items:center;
+  gap:28px
+}
+.flower {
+  font-size:65px;
+  color:var(--accent)
+}
+.about-strip h2 {
+  font-size:21px;
+  margin:0 0 8px
+}
+.about-strip p {
+  font-size:13px;
+  color:var(--muted);
+  margin:0
+}
+.about-strip>a {
+  white-space:nowrap;
+  margin-left:auto;
+  font-size:13px
+}
+.footer {
+  padding-top:32px;
+  padding-bottom:32px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  font-size:11px;
+  color:var(--muted)
+}
+.prose {
+  max-width:800px;
+  padding-top:65px;
+  padding-bottom:70px
+}
+.prose h1 {
+  font-size:44px;
+  margin-top:20px
+}
+.back {
+  display:inline-block;
+  font-size:13px;
+  margin-bottom:35px;
+  color:var(--muted)
+}
+.lead {
+  font-size:19px;
+  color:var(--muted);
+  border-bottom:1px solid var(--line);
+  padding-bottom:30px
+}
+.article-body {
+  font-size:17px;
+  line-height:2
+}
+.article-body h2 {
+  margin-top:38px;
+  font-size:25px
+}
+.note {
+  padding:20px;
+  background:var(--surface);
+  font-size:13px;
+  color:var(--muted);
+  margin:35px 0
+}
+.skip {
+  position:absolute;
+  top:-100px;
+  padding:10px;
+  background:var(--paper);
+  z-index:10
+}
+.skip:focus {
+  top:10px
+}
+.sr-only {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap
+}
+[hidden] {
+  display:none!important
+}
+@media(max-width:760px) {
+  .wrap {
+    padding-inline:22px
+  }
+  .brand span {
+    display:none
+  }
+  nav {
+    gap:18px
+  }
+  .hero {
+    grid-template-columns:1fr;
+    padding:50px 0 35px;
+    gap:10px
+  }
+  .hero h1 {
+    font-size:52px
+  }
+  .art {
+    height:290px
+  }
+  .orbit {
+    width:250px;
+    height:250px
+  }
+  .paper {
+    width:210px;
+    padding:22px
+  }
+  .paper strong {
+    font-size:27px;
+    margin:20px 0
+  }
+  .spark {
+    right:calc(50% - 155px);
+    font-size:70px
+  }
+  .now {
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:8px 12px;
+    padding:16px
+  }
+  .now p {
+    width:100%
+  }
+  .writing {
+    padding:45px 0
+  }
+  .tools {
+    align-items:start;
+    flex-direction:column
+  }
+  .post-grid {
+    grid-template-columns:1fr
+  }
+  .post-card {
+    padding:24px
+  }
+  .meta {
+    margin-bottom:16px
+  }
+  .search {
+    width:100%
+  }
+  .search input {
+    flex:1
+  }
+  .about-strip {
+    gap:15px;
+    flex-wrap:wrap
+  }
+  .flower {
+    font-size:44px
+  }
+  .about-strip>div {
+    flex:1
+  }
+  .about-strip>a {
+    margin-left:58px
+  }
+  .footer {
+    flex-direction:column;
+    gap:4px
+  }
+  .prose h1 {
+    font-size:34px
+  }
+  .prose {
+    padding-top:40px
+  }
+  .section-heading>span {
+    white-space:nowrap
+  }
+  h2 {
+    font-size:25px
+  }
+  
+}
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior:auto
+  }
+  * {
+    transition:none!important
+  }
+  
 }
